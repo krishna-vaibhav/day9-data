@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	<!-- spring bean tag scope singleton loading policy eager -->
+	<bean id="test" class="dependency.TestTransport" lazy-init="true" />
+	<bean id="http" class="dependency.HttpTransport" scope="prototype"/>
+	<bean id="soap" class="dependency.SoapTransport" lazy-init="true"/>
+	<!-- dependent bean config -->
+	<bean id="my_atm" class="dependent.ATMImpl" scope="prototype">
+		<!-- setter based D.I -->
+		<property name="myTransport" ref="http" />
+	</bean>
+
+
+</beans>

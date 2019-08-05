@@ -1,0 +1,133 @@
+Quick Revision
+
+
+def scope=singleton
+lazy-init -- def value=false --Meaning --- whenever SC comes across bean def(<bean ....>) it will loc/load/inst ....invoke bean life cycle
+lazy-init=true --- implies loc/load/inst beans only after clnt demands for it (ctx.getBean(id))
+above applicable for scope=singleton
+For prototype scope --- bean will get loc/load & instantiated only on demand.
+automatic wiring
+wiring = injecting dependecies into dependent objects
+auto wiring means ---- bean definition in xml need not contain property tag or construcutor arg tag. This can resolved auto by container.
+
+Types of auto wiring 
+autowire="byName"----SC tries to match bean property by name. In dependent bean class , u must have matching setter & in xml config file -- MUST have --bean id with the matched name.
+
+auto-wired="byType" --- SC tries match bean property by type of the property --- if it comes across multiple beans of the same type ---NoUniqueBean exception is raised.
+eg --- In dependent --- ATMImpl
+private Transport myTransport;---- setter
+Transport imple --- test,soap,http
+
+auto-wired=constructor --- 
+paramed constr  --- byName --- constr arg name MUST match with dependency bean id ----if not found --- byType---
+
+
+
+Spring programming using annotations
+
+0. To enable annotation support -- add context namespace & add the following
+<context:annotation-config/> --- To tell SC --to enable annotation support(eg --- AutoWired,PostConstruct,Predestroy,.....)
+
+0.5 --- How to specify location(base pkg) of spring beans to SC?
+<context:component-scan base-package="comma sep list of pkgs"/>---
+SC starts searching(scanning)  in specified pkgs (including sub-pkgs) ---for classes anno with stereotype anno --- @Component,@Service,@Repository,@Controller
+
+
+Basic class level annotations meant for  SC
+Super type 
+@Component --- spring bean class
+sub - type annotations
+@Controller --- In Web MVC scenario -- for request handling.
+@Service --- Service layer (B.L) + transaction management
+@Repository --- DAO layer
+@RestController -- RESTful service provider
+
+
+
+1. @Component --- <bean id , class> --- SC interprets it & starts bean life-cycle.
+eg --- 
+@Component("abc")
+public class MyBean {...}
+xml --- <bean id="abc" class="beans.MyBean"/>
+OR
+@Component
+public class MyBean
+xml --- <bean id="myBean" class="beans.MyBean"/>
+
+2. @Controller -- spring web mvc controller
+3. @Repository --- DAO layer class
+4. @Service --- for service layer beans --- transactions.
+5. @Scope(value="singleton|prototype|request|session")--- class level annotaion --- in xml via scope atribute.
+6. @Lazy(true|false) ----class level anno -- lazy-init attribute
+7. @PostConstruct ---method level anno - init-method ---method level
+8. @PreDestroy ---method level anno-- destroy-method --- method level
+9. @Required(true|false) --- setter method or paramed constr or field level ---tells SC if depenency is mandatory or optional-- def=true
+10. @AutoWired ---setter method or paramed constr or field level 
+eg --- TestTransport imple Transport
+ auto-wired="byType"
+eg  -- field level annotation ---in ATMImpl bean (dependent)
+@AutoWired
+private Transport myTransport;
+Meaning -- no parameterised constr, no setter , no xml containing bean definition is required.
+SC --- chks for any bean of Transport by type & injects it in ATMImpl
+
+
+
+11. @AutoWired
+@Qualifier("test")
+private Transport myTransport; ---- auto-wired="byName"
+---spring supplied anno.
+
+
+
+
+OR
+@Resource(name="advSpellChecker")
+private SpellChecker checker; ---- auto-wired="byName"
+--J2EE supplied via javax.annotation
+
+
+SpEL --- spring expression language
+dynamic expression languge ---spring(3.x) supplied -- to evaluate expressions dynamically.
+#{SpEL expression} --- more powerful than JSP EL ---JSP EL allows only getters , where as SpEL allows --- getters,setters,constr invocation, static & non-static method invocations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

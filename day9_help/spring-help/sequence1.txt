@@ -1,0 +1,29 @@
+Sequence for reference
+1. Diags ---spring_ioc_container & spring-modules-overview
+2. readme_spring --- IoC --- generic term & 4 key points of why spring
+3. eclipse project --- why_spring
+for understanding --- scope,lazy-init,setter based D.I , init , destroy method call backs.
+ref project -- why_spring
+
+
+
+4. Ref ---eclipse project spring_basics
+Sequence
+1. com.app.core.atm -- setter based D.I --spring-config.xml
+2. com.app.core.atm1 -- constructor  based D.I ,meta data -- spring-config1.xml
+3. com.app.core.atm2 -- factory method  based D.I
+4. com.app.core.atm3 -- combo of setter based +constructor  based D.I
+5. com.app.simple --- auto-wiring byName
+6. com.app.simple1 --- auto-wiring byType
+7. com.app.simple2 --- auto-wiring constructor
+8. com.app.simple6 -- handling collection of values.
+9. com.app.simple6_ref -- handling collection of refs + autowire
+10. com.app.spel -- demo for Spring Expression language --- similar in capability to OGNL -- meaning can invoke ---getters,setters,static , non static methods.
+
+
+
+
+
+
+
+

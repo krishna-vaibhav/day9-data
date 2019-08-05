@@ -1,0 +1,109 @@
+Assignment status for Vendor --HAS A ---Bank Accounts
+POJO layer ?
+DAO ?
+JB ?
+JSP ?
+-------------------------------
+Revise 
+What is a trigger for LazyInitializationExc ?
+Def fetch type for 
+1. one-to-one -- EAGER
+2. one-to-many -- LAZY
+3. many-to-one --EAGER
+4. many-to-many --LAZY
+
+In which of above cases u will get exc?
+
+2 & 4
+eg : Student --HAS A -- Address (Adr --entity or embeddable)
+String jpql = "select s from Student s where s:id=:id";
+....
+select query will be fired on --- BOTH
+If adr is entity --- where will be adr details stored ? ---
+in same table as students or separate table ? --separate table
+
+If adr is embeddable --- where will be adr details stored ? ---
+in same table as students or separate table ? --in same table as students table.
+
+eg : Vendor --HAS A --List<BankAccount>
+jpql="select v from Vendor v where v.id=:id"
+select query ---only on vendors table
+
+jpql="select a from BankAccount a where a.id=:id"
+select query ---vendors n bankaccts table
+problem -- any -to-many
+
+
+Solution --jpql --join fetch keyword
+-----------------------
+POJO state transitions
+
+get vs load 
+------------------------------
+Enter Spring
+Why spring
+What is spring 
+Dependency injection
+eg : Java bean --- dependent
+DAO layer --- dependency
+Tight coupling --- JB constr created dao inst i.e dependent obj is managing its dependency.
+Dis adv -- The moment,  nature of dependency changes ---dependent objs have to be modified.
+--regarded as conventional prog approach.
+D.I --- Instead of dependent objs managing their dependencies , dependencies are made available in rdymade manner(i.e are managed) by 3rd party containers(eg Spring or EJB--enterprise java bean container)---leading to loose coupling.
+---regarded as IoC --inversion of control.
+
+Popularly known as "Hollywood Principle" --- You don't call us ...we will call you!!!
+---------------------
+ATMImpl a1=new ATMImpl();
+1. M.A (meta space) --- 
+a1.setMyTransport(new TestTransport());
+----------------------
+Steps for adding spring support for Java SE
+0. Confirm spring plug-in --Spring STS 
+1. Create user library --containing spring jars.
+3. Create Java Project
+4. Add user lib under project's build path.
+5. Create dependents n dependencies.
+6. Create spring bean config file ---to specify meta data instrs for SC(spring container) using xml .
+location --run time class path (eg : <resources>)
+-----------------------
+NOTE :
+1. Default scope of spring beans = singleton
+2. Def loading policy of spring beans = eager.
+3. Different scopes available in Java SE --- singleton & prototype
+Web app -- singleton , prototype , request,session
+singleton=SC creates SINGLE instance of the spring bean & shared across multiple requests / multiple clnts.
+(singletons are loaed eagerly by default)
+
+prototype -- created as per demand.(typically 1 per request)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
